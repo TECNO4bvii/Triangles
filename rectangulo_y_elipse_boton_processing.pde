@@ -1,0 +1,45 @@
+void setup() {
+  size(1024,600);
+  background(0,0,0);
+  fill(255);
+  ellipse(500,400,100,100);
+  fill(255,0,0);
+  rect(100,100,200,100);
+  fill(0,255,0);
+  rect(400,100,200,100);
+  fill(0,0,255);
+  rect(700,100,200,100);
+  fill(255); 
+}
+void draw (){
+  
+  if (mousePressed==true){
+  if (mouseX<300)
+  if (mouseX>100)
+  if (mouseY>100)
+  if (mouseY<200)
+  fill(255,0,0);
+   ellipse(500,400,100,100)
+   ;
+  }
+   if (mousePressed==true){
+  if (mouseX<600)
+  if (mouseX>400)
+  if (mouseY>100)
+  if (mouseY<200)
+  fill(0,255,0);
+   ellipse(500,400,100,100);
+   
+   if (mousePressed==true){
+  if (mouseX<900)
+  if (mouseX>700)
+  if (mouseY>100)
+  if (mouseY<200)
+  fill(0,0,255);
+   ellipse(500,400,100,100);
+  }
+ 
+   }
+  
+ 
+}
