@@ -1,0 +1,54 @@
+const int EchoPin = A2;
+  const int TriggerPin = A1;
+  
+  void setup() {
+  for(int i=8;  i<14; i++){ 
+    pinMode(i, OUTPUT); //del ping 5 al ping 11 sale informacion
+  }
+   Serial.begin(9600); // a quina velocitat a de enviar les dades
+   pinMode(TriggerPin, OUTPUT);// amb 
+   pinMode(EchoPin, INPUT);
+  }
+   
+  void loop() {
+   int cm = ping(TriggerPin, EchoPin);
+   int distance ;
+   Serial.print("Distancia: ");
+   Serial.println(cm);
+   delay(1000);
+   
+   if(distance<30){
+      digitalWrite(10, HIGH); //Enable 1 derecha
+     digitalWrite(9, LOW); //I1 motor para atras
+     digitalWrite(8, HIGH); //I2 motor 
+    
+     digitalWrite(11, HIGH); //Enable 2 izquierda
+     digitalWrite(12, LOW); //I3 motor para
+     digitalWrite(13, HIGH); //I4 motor para atras
+  }
+  
+   if(distance>30){
+   digitalWrite(10, HIGH); //Enable 1
+     digitalWrite(9, LOW); //I1 motor 
+     digitalWrite(8, LOW); //I2 motor 
+    
+     digitalWrite(11, HIGH); //Enable 2
+     digitalWrite(12, LOW); //I3 motor 
+     digitalWrite(13, LOW); //I4 motor  
+  }
+  }
+  
+  int ping(int TriggerPin, int EchoPin) {
+   long duration, distanceCm;
+   
+   digitalWrite(TriggerPin, LOW);  //para generar un pulso limpio ponemos a LOW 4us
+   delayMicroseconds(4);
+   digitalWrite(TriggerPin, HIGH);  //generamos Trigger (disparo) de 10us
+   delayMicroseconds(10);
+   digitalWrite(TriggerPin, LOW);
+   
+   duration = pulseIn(EchoPin, HIGH);  //medimos el tiempo entre pulsos, en microsegundos
+   
+   distanceCm = duration * 10 / 292/ 2;   //convertimos a distancia, en cm
+   return distanceCm;
+  }
