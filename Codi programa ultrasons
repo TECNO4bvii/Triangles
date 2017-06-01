@@ -1,7 +1,8 @@
 const int EchoPin = A2;
   const int TriggerPin = A1;
+   int distance ;
   
-  void setup() {
+  void setup() { 
   for(int i=8;  i<14; i++){ 
     pinMode(i, OUTPUT); //del ping 5 al ping 11 sale informacion
   }
@@ -12,12 +13,12 @@ const int EchoPin = A2;
    
   void loop() {
    int cm = ping(TriggerPin, EchoPin);
-   int distance ;
    Serial.print("Distancia: ");
    Serial.println(cm);
-   delay(1000);
+   delay(50);
    
-   if(distance<30){
+   if(cm>50){
+    Serial.println("petita");
       digitalWrite(10, HIGH); //Enable 1 derecha
      digitalWrite(9, LOW); //I1 motor para atras
      digitalWrite(8, HIGH); //I2 motor 
@@ -27,12 +28,14 @@ const int EchoPin = A2;
      digitalWrite(13, HIGH); //I4 motor para atras
   }
   
-   if(distance>30){
-   digitalWrite(10, HIGH); //Enable 1
+   if(cm<50){
+Serial.println("gran");
+    
+   digitalWrite(10, LOW); //Enable 1
      digitalWrite(9, LOW); //I1 motor 
      digitalWrite(8, LOW); //I2 motor 
     
-     digitalWrite(11, HIGH); //Enable 2
+     digitalWrite(11, LOW); //Enable 2
      digitalWrite(12, LOW); //I3 motor 
      digitalWrite(13, LOW); //I4 motor  
   }
@@ -51,4 +54,4 @@ const int EchoPin = A2;
    
    distanceCm = duration * 10 / 292/ 2;   //convertimos a distancia, en cm
    return distanceCm;
-  }
+     }
